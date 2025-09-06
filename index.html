@@ -4,28 +4,72 @@
     <title>Pokémon API</title>
   </head>
   <body>
-    <p>Welcome to the Pokémon API</p>
-    <h1>Guess The Pokemon</h1>
+    <style>
+      div {
+        max-width: fit-content;
+        margin-inline: auto;
+        text-align: center;
+      }
+      .game {
+        border: 2px solid rgb(111, 207, 245);
+        padding-inline: 20px;
+        width: 500px;
+        max-width: 500px;
+        background-image: linear-gradient(
+          to bottom,
+          rgb(134, 207, 236),
+          rgb(64, 166, 171)
+        );
+      }
+      .hintButton {
+        margin: 5px;
+      }
+      .newPokemon {
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+      h1 {
+        color: rgb(0, 0, 0);
+      }
+      .dexEntry {
+        max-width: fit-content;
+      }
+      img {
+        width: 200px;
+      }
+      p {
+        font-size: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+    </style>
+    <div class="container">
+      <p>Welcome to the Pokémon API</p>
+      <div class="game">
+        <h1>Guess The Pokemon</h1>
 
-    <button id="fetchButton" onclick="fetchPokemon()">New Pokemon</button>
-    <br />
-    <input type="text" id="pokemonInput" placeholder="Enter Pokémon name" />
-    <button id="searchButton" onclick="searchPokemon()">Search</button>
+        <button class="newPokemon" id="fetchButton" onclick="fetchPokemon()">
+          New Pokemon
+        </button>
+        <br />
+        <input type="text" id="pokemonInput" placeholder="Enter Pokémon name" />
+        <button id="searchButton" onclick="searchPokemon()">Search</button>
 
-    <div>
-      <button onclick="showImage()">Show Image</button>
-      <button onclick="reveal()">Reveal Answer</button>
-      <p id="scoreDisplay">Score: 0</p>
+        <div>
+          <button class="hintButton" onclick="showImage()">Show Image</button>
+          <button class="hintButton" onclick="reveal()">Reveal Answer</button>
+          <p id="scoreDisplay">Score: 0</p>
+        </div>
+
+        <div id="pokemonContainer">
+          <!-- Pokémon data will be displayed here -->
+          <p id="pokemonName"></p>
+          <img id="pokemonImage" src="" alt="" />
+          <p class="dexEntry" id="pokemonDescription"></p>
+        </div>
+      </div>
+
+      <p id="correct"></p>
     </div>
-
-    <div id="pokemonContainer">
-      <!-- Pokémon data will be displayed here -->
-      <p id="pokemonName"></p>
-      <img id="pokemonImage" src="" alt="" />
-      <p id="pokemonDescription"></p>
-    </div>
-
-    <p id="correct"></p>
   </body>
 </html>
 
@@ -105,7 +149,7 @@
 
   function reveal() {
     document.getElementById("pokemonName").innerText = pokemonName;
-    showImage();
+    document.getElementById("pokemonImage").src = pokemonImgUrl;
   }
 
   function getDexEntry(url, _callback) {
